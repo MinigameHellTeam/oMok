@@ -8,3 +8,13 @@ C:\Users\paulk\source\repos\응소실 팀플 오목\oMok\obj\Debug\oMok.csproj.G
 C:\Users\paulk\source\repos\응소실 팀플 오목\oMok\obj\Debug\oMok.csproj.CoreCompileInputs.cache
 C:\Users\paulk\source\repos\응소실 팀플 오목\oMok\obj\Debug\oMok.exe
 C:\Users\paulk\source\repos\응소실 팀플 오목\oMok\obj\Debug\oMok.pdb
+C:\Users\paulk\Desktop\응소실 팀플 오목\응소실 팀플 오목\oMok\bin\Debug\oMok.exe.config
+C:\Users\paulk\Desktop\응소실 팀플 오목\응소실 팀플 오목\oMok\bin\Debug\oMok.exe
+C:\Users\paulk\Desktop\응소실 팀플 오목\응소실 팀플 오목\oMok\bin\Debug\oMok.pdb
+C:\Users\paulk\Desktop\응소실 팀플 오목\응소실 팀플 오목\oMok\obj\Debug\oMok.csprojAssemblyReference.cache
+C:\Users\paulk\Desktop\응소실 팀플 오목\응소실 팀플 오목\oMok\obj\Debug\oMok.Form1.resources
+C:\Users\paulk\Desktop\응소실 팀플 오목\응소실 팀플 오목\oMok\obj\Debug\oMok.Properties.Resources.resources
+C:\Users\paulk\Desktop\응소실 팀플 오목\응소실 팀플 오목\oMok\obj\Debug\oMok.csproj.GenerateResource.cache
+C:\Users\paulk\Desktop\응소실 팀플 오목\응소실 팀플 오목\oMok\obj\Debug\oMok.csproj.CoreCompileInputs.cache
+C:\Users\paulk\Desktop\응소실 팀플 오목\응소실 팀플 오목\oMok\obj\Debug\oMok.exe
+C:\Users\paulk\Desktop\응소실 팀플 오목\응소실 팀플 오목\oMok\obj\Debug\oMok.pdb

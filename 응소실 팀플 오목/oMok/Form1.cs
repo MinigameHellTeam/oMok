@@ -13,6 +13,8 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Threading;
 using System.Security.Policy;
+using oMok.Properties;
+using System.Windows.Forms.VisualStyles;
 
 enum STONE
 {
@@ -29,10 +31,9 @@ namespace oMok
         bool flag = false;
         bool imageFlag = true;
 
-        List<Load> lstSave = new List<Load>();
-        int sequence = 0;
-        bool loadFlag = false;
         bool startFlag = false;
+        bool pauseFlag = false;
+
         int margin = 40;
         int gridSize = 30;
         int stoneSize = 28;
@@ -40,6 +41,9 @@ namespace oMok
         int bStoneCnt = 0;
         int wStoneCnt = 0;
 
+        List<Save> listRevive = new List<Save>();
+        int sequence = 0;
+        bool reviveFlag = false;
 
         Graphics g;
         Pen pen;
@@ -72,11 +76,12 @@ namespace oMok
                 MessageBox.Show("시작 버튼을 눌러야 게임을 시작할수 있습니다!");
                 return;
             }
-            if(loadFlag == true)
+            if (pauseFlag == true)
             {
-                ReviveGame();
+                MessageBox.Show("게임을 다시 시작해야 합니다!");
                 return;
             }
+
             int x = (e.X - margin + gridSize / 2) / gridSize;
             int y = (e.Y - margin + gridSize / 2) / gridSize;
 
@@ -100,14 +105,12 @@ namespace oMok
                     g.FillEllipse(blackStone, r);
                 else
                 {
-                    Bitmap bmp = new Bitmap("../../Images/black.png");
+                    Bitmap bmp = new Bitmap(Resources.black);
                     g.DrawImage(bmp, r);
                 }
-
                 lblOrder.Text = "백돌";
                 lblTime.Text = "10";
                 bStoneCnt++;
-                lstSave.Add(new Load(x, y, STONE.black, bStoneCnt));
                 flag = true;
                 oMokBoard[x, y] = STONE.black;
             }
@@ -117,29 +120,17 @@ namespace oMok
                     g.FillEllipse(whiteStone, r);
                 else
                 {
-                    Bitmap bmp = new Bitmap("../../Images/white.png");
+                    Bitmap bmp = new Bitmap(Resources.white);
                     g.DrawImage(bmp, r);
                 }
                 lblOrder.Text = "흑돌";
                 lblTime.Text = "10";
-
                 wStoneCnt++;
-                lstSave.Add(new Load(x, y, STONE.white, wStoneCnt));
                 flag = false;
                 oMokBoard[x, y] = STONE.white;
             }
 
             checkOmok(x, y);
-        }
-
-        private void 그리기ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            imageFlag = false;
-        }
-
-        private void 이미지ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            imageFlag = true;
         }
 
         private void DrawBoard()
@@ -173,7 +164,7 @@ namespace oMok
                             g.FillEllipse(whiteStone, margin + x * gridSize - stoneSize / 2, margin + y * gridSize - stoneSize / 2, stoneSize, stoneSize);
                         else
                         {
-                            Bitmap bmp = new Bitmap("../../Images/white.png");
+                            Bitmap bmp = new Bitmap(Resources.white);
                             g.DrawImage(bmp, margin + x * gridSize - stoneSize / 2, margin + y * gridSize - stoneSize / 2, stoneSize, stoneSize);
                         }
                     }
@@ -183,7 +174,7 @@ namespace oMok
                             g.FillEllipse(blackStone, margin + x * gridSize - stoneSize / 2, margin + y * gridSize - stoneSize / 2, stoneSize, stoneSize);
                         else
                         {
-                            Bitmap bmp = new Bitmap("../../Images/black.png");
+                            Bitmap bmp = new Bitmap(Resources.black);
                             g.DrawImage(bmp, margin + x * gridSize - stoneSize / 2, margin + y * gridSize - stoneSize / 2, stoneSize, stoneSize);
                         }
                     }
@@ -281,7 +272,7 @@ namespace oMok
         }
         private void OmokComplete(int x, int y)
         {
-            saveGame();
+            timer.Stop();
             DialogResult res = MessageBox.Show(oMokBoard[x, y].ToString().ToUpper()
                 + "Wins!\n새로운 게임을 시작할까요?", "게임 종료", MessageBoxButtons.YesNo);
             
@@ -305,91 +296,22 @@ namespace oMok
                     oMokBoard[x, y] = STONE.none;
 
             panel1.Refresh();
-            loadFlag = false;
             bStoneCnt = 0;
             wStoneCnt = 0;
             DrawBoard();
             DrawStone();
         }
 
-        private void LoadGame()
-        {
-            imageFlag = true;
-            flag = false;
-
-            for (int x = 0; x < 19; x++)
-                for (int y = 0; y < 19; y++)
-                    oMokBoard[x, y] = STONE.none;
-
-            panel1.Refresh();
-            DrawBoard();
-            DrawStone();
-        }
-        Font font = new Font("Vernada", 10);
-        public void DrawStoneSequence(int v, Brush color, Rectangle r)
-        {
-            StringFormat stringFormat = new StringFormat();
-            stringFormat.Alignment = StringAlignment.Center;
-            stringFormat.LineAlignment = StringAlignment.Center;
-            g.DrawString(v.ToString(), font, color, r, stringFormat);
-        }
 
         private void 저장ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.InitialDirectory = "../../Data/";
-            ofd.Filter = "Omok files(*.omk)|*.omk";
-            ofd.ShowDialog();
-            string fileName = ofd.FileName;
-
-            try
-            {
-                StreamReader r = File.OpenText(fileName);
-                string line = "";
-
-                while((line=r.ReadLine()) !=null)
-                {
-                    string[] items = line.Split(' ');
-                    Load rev = new Load(int.Parse(items[0]), int.Parse(items[1]), items[2] == "black" ? STONE.black : STONE.white, int.Parse(items[3]));
-                    lstSave.Add(rev);
-                }
-                r.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            loadFlag = true;
-            sequence = 0;
-            LoadGame();
-        }
-
-        private void saveGame()
-        {
-            string filename = "../../Data/" + DateTime.Now.ToShortDateString() + "-" + DateTime.Now.Hour + "시" +  DateTime.Now.Minute + "분.omk";
-
-
-            FileStream fs = new FileStream(filename, FileMode.Create);
-            StreamWriter sw = new StreamWriter(fs, Encoding.Default);
-
-            foreach (Load item in lstSave)
-            {
-                sw.WriteLine("{0} {1} {02} {03}", item.X, item.Y, item.stone, item.seq);
-            }
-
-            sw.Close();
-            fs.Close();
-        }
-        private void ReviveGame()
-        {
-            if (sequence < lstSave.Count)
-                drawAStone(lstSave[sequence++]);
+            
         }
 
         private void 다시시작ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             NewGame();
+            pauseFlag = false;
         }
 
         private void 끝내기ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -411,6 +333,7 @@ namespace oMok
                 timer.Stop();
                 if (lblOrder.Text == "백돌")
                 {
+
                     DialogResult res = MessageBox.Show("Black Wins!\n새로운 게임을 시작할까요?", "게임 종료", MessageBoxButtons.YesNo);
                     if (res == DialogResult.Yes)
                         NewGame();
@@ -433,48 +356,13 @@ namespace oMok
         {
             timer.Start();
             startFlag = true;
+            pauseFlag = false;
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
+            pauseFlag = true;
             timer.Stop();
         }
-
-        private void drawAStone(Load item)
-        {
-            int x = item.X;
-            int y = item.Y;
-            STONE s = item.stone;
-            int seq = item.seq;
-
-            Rectangle r = new Rectangle(margin + gridSize * x - stoneSize / 2, margin + gridSize * y - stoneSize / 2, stoneSize, stoneSize);
-
-            if(s == STONE.black)
-            {
-                if (imageFlag == false)
-                    g.FillEllipse(blackStone, r);
-                else
-                {
-                    Bitmap bmp = new Bitmap("../../Images/black.png");
-                    g.DrawImage(bmp, r);
-                }
-                DrawStoneSequence(seq, Brushes.White, r);
-                oMokBoard[x, y] = STONE.black;
-            }
-            else
-            {
-                if (imageFlag == false)
-                    g.FillEllipse(whiteStone, r);
-                else
-                {
-                    Bitmap bmp = new Bitmap("../../Images/white.png");
-                    g.DrawImage(bmp, r);
-                }
-                DrawStoneSequence(seq, Brushes.Black, r);
-                oMokBoard[x, y] = STONE.white;
-            }
-            checkOmok(x, y);
-        }
     }
-
 }

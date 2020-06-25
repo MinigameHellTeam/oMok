@@ -7,14 +7,14 @@ using System.IO;
 
 namespace oMok
 {
-    class Load
+    class Save
     {
         public int X { get; set; }
         public int Y { get; set; }
         public STONE stone { get; set; }
         public int seq { get; set; }
         
-        public Load(int x, int y , STONE s, int seq)
+        public Save(int x, int y , STONE s, int seq)
         {
             this.X = x;
             this.Y = y;

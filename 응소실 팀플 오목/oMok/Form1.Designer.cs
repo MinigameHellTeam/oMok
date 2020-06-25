@@ -34,9 +34,6 @@
             this.다시시작ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.저장ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.끝내기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.보기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.그리기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.이미지ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.lblTime = new System.Windows.Forms.Label();
@@ -52,11 +49,10 @@
             // 
             this.menuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.파일ToolStripMenuItem,
-            this.보기ToolStripMenuItem});
+            this.파일ToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(946, 30);
+            this.menuStrip.Size = new System.Drawing.Size(946, 28);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -67,52 +63,29 @@
             this.저장ToolStripMenuItem,
             this.끝내기ToolStripMenuItem});
             this.파일ToolStripMenuItem.Name = "파일ToolStripMenuItem";
-            this.파일ToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
+            this.파일ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.파일ToolStripMenuItem.Text = "파일";
             // 
             // 다시시작ToolStripMenuItem
             // 
             this.다시시작ToolStripMenuItem.Name = "다시시작ToolStripMenuItem";
-            this.다시시작ToolStripMenuItem.Size = new System.Drawing.Size(157, 26);
+            this.다시시작ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.다시시작ToolStripMenuItem.Text = "다시 시작";
             this.다시시작ToolStripMenuItem.Click += new System.EventHandler(this.다시시작ToolStripMenuItem_Click);
             // 
             // 저장ToolStripMenuItem
             // 
             this.저장ToolStripMenuItem.Name = "저장ToolStripMenuItem";
-            this.저장ToolStripMenuItem.Size = new System.Drawing.Size(157, 26);
+            this.저장ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.저장ToolStripMenuItem.Text = "다시 보기";
             this.저장ToolStripMenuItem.Click += new System.EventHandler(this.저장ToolStripMenuItem_Click);
             // 
             // 끝내기ToolStripMenuItem
             // 
             this.끝내기ToolStripMenuItem.Name = "끝내기ToolStripMenuItem";
-            this.끝내기ToolStripMenuItem.Size = new System.Drawing.Size(157, 26);
+            this.끝내기ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.끝내기ToolStripMenuItem.Text = "끝내기";
             this.끝내기ToolStripMenuItem.Click += new System.EventHandler(this.끝내기ToolStripMenuItem_Click);
-            // 
-            // 보기ToolStripMenuItem
-            // 
-            this.보기ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.그리기ToolStripMenuItem,
-            this.이미지ToolStripMenuItem});
-            this.보기ToolStripMenuItem.Name = "보기ToolStripMenuItem";
-            this.보기ToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
-            this.보기ToolStripMenuItem.Text = "보기";
-            // 
-            // 그리기ToolStripMenuItem
-            // 
-            this.그리기ToolStripMenuItem.Name = "그리기ToolStripMenuItem";
-            this.그리기ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
-            this.그리기ToolStripMenuItem.Text = "그리기";
-            this.그리기ToolStripMenuItem.Click += new System.EventHandler(this.그리기ToolStripMenuItem_Click);
-            // 
-            // 이미지ToolStripMenuItem
-            // 
-            this.이미지ToolStripMenuItem.Name = "이미지ToolStripMenuItem";
-            this.이미지ToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
-            this.이미지ToolStripMenuItem.Text = "이미지";
-            this.이미지ToolStripMenuItem.Click += new System.EventHandler(this.이미지ToolStripMenuItem_Click);
             // 
             // panel1
             // 
@@ -206,7 +179,7 @@
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "B";
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -218,10 +191,7 @@
 
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem 파일ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 보기ToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ToolStripMenuItem 그리기ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 이미지ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 다시시작ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 저장ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 끝내기ToolStripMenuItem;
