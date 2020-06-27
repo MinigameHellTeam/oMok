@@ -238,12 +238,6 @@ namespace oMok
                 else
                     break;
 
-            for (int i = x - 1, j = y + 1; i >= 0 && j <= 18; i--, j++)
-                if (oMokBoard[i, j] == oMokBoard[x, y])
-                    cnt++;
-                else
-                    break;
-
             if (cnt >= 5)
             {
                 OmokComplete(x, y);
